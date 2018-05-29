@@ -12,3 +12,22 @@ function orbitalPeriod(arr) {
 }
 
 orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
+
+// alternatively (with second function)
+
+var findOP = function(alt) {
+  alt = Math.round(2 * Math.PI * Math.sqrt(Math.pow((alt + 6367.4447), 3) / 398600.4418));
+  return alt;
+};
+
+function orbitalPeriod(arr) {
+  var endArray = [];
+  for (var i = 0; i < arr.length; i++) {
+    var op = findOP(arr[i].avgAlt);
+    endArray.push({"name": arr[i].name, "orbitalPeriod": op});
+  }
+  
+  return endArray;
+}
+
+orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
